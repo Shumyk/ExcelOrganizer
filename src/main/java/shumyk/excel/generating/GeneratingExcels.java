@@ -16,19 +16,19 @@ import shumyk.excel.formula.ExcelFormula;
 public class GeneratingExcels {
 	private static final Logger LOGGER = LogManager.getLogger(GeneratingExcels.class);
 	
-	public void createMenusPerPerson(String menuFilename, String namesFilename) throws IOException {
-		FileInputStream fis = new FileInputStream(new File(namesFilename));
+	public static void createMenusPerPerson(File menu, File names) throws IOException {
+		FileInputStream fis = new FileInputStream(names);
 		Workbook workbook = new XSSFWorkbook(fis);
 		String pathDir = "personsMenus/";
 		new File(pathDir).mkdir();
 		
 		for (Row row : workbook.getSheetAt(0)) {
-			ExcelFormula excelFormula = new ExcelFormula(new XSSFWorkbook(new FileInputStream(new File(menuFilename))));
+			ExcelFormula excelFormula = new ExcelFormula(new XSSFWorkbook(new FileInputStream(menu)));
 			Workbook menuInitial = excelFormula.createMenuWithPriceCalculating();
 			
-			
+			String menuFileName = menu.getName();
 			String pathNewExcel = pathDir
-					.concat(menuFilename.substring(0, menuFilename.indexOf(".xlsx")))
+					.concat(menuFileName.substring(0, menuFileName.indexOf(".xlsx")))
 					.concat(" ")
 					.concat(row.getCell(0).getStringCellValue())
 					.concat(".xlsx");
