@@ -1,11 +1,15 @@
 package shumyk.excel.gui.controller;
 
 import java.io.File;
+import java.util.List;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
@@ -13,14 +17,22 @@ import shumyk.excel.generating.GeneratingExcels;
 
 public class ExcelOrganizerController {
 	private FileChooser fileChooser = new FileChooser();
-	private File menu, names;
+	private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Only xlsx files", "*.xlsx");
+
+	
+	private File menu;
+	private File names;
 	
 	@FXML
 	private TextField menuUrl;
 	@FXML
 	private TextField namesUrl;
-
-	public ExcelOrganizerController() {}
+	@FXML 
+	private ListView<File> listFilesPrintView;
+	
+	public ExcelOrganizerController() {
+		fileChooser.getExtensionFilters().add(extFilter);
+	}
 	
 	
 	/* ------------- Controller methods ---------- */
@@ -90,5 +102,28 @@ public class ExcelOrganizerController {
 		alert.showAndWait();
 
 	}
+	
+	@FXML
+	private void addFilesToPrint(ActionEvent event) {
+		listFilesPrintView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+		Button actionBtn = (Button) event.getSource();
+		List<File> filesToPrint = fileChooser.showOpenMultipleDialog(actionBtn.getContextMenu());
+		
+		if(filesToPrint==null)
+			return;
+		
+		listFilesPrintView.getItems().addAll(filesToPrint);
+	}
+	
+	@FXML
+	private void removeFromList() {
+		ObservableList<File> itemToRemove = listFilesPrintView.getSelectionModel().getSelectedItems();
+		
+		listFilesPrintView.getItems().removeAll(itemToRemove);
+	}
+	
+	@FXML
+	private void generatePrintFile() {}
 	
 }

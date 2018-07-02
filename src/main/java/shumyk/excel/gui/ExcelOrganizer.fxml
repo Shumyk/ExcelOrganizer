@@ -2,16 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<TabPane fx:controller="shumyk.excel.gui.controller.ExcelOrganizerController" prefHeight="252.0" prefWidth="610.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane prefHeight="252.0" prefWidth="610.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shumyk.excel.gui.controller.ExcelOrganizerController">
   <tabs>
     <Tab closable="false" text="Menus generating">
          <content>
@@ -22,7 +21,7 @@
                         <Insets bottom="20.0" top="20.0" />
                      </opaqueInsets>
                      <children>
-                        <Button fx:id="btnMenu" onAction="#chooseFile" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefWidth="121.0" style="-fx-background-color: silver; -fx-border-color: silver; -fx-border-radius: 10; -fx-background-radius: 10;" text="Choose menu" textAlignment="CENTER" textFill="#b25252">
+                        <Button fx:id="btnMenu" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#chooseFile" prefWidth="121.0" style="-fx-background-color: silver; -fx-border-color: silver; -fx-border-radius: 10; -fx-background-radius: 10;" text="Choose menu" textAlignment="CENTER">
                            <font>
                               <Font name="Noto Mono" size="14.0" />
                            </font>
@@ -42,7 +41,7 @@
                         <Insets bottom="20.0" top="20.0" />
                      </opaqueInsets>
                      <children>
-                        <Button fx:id="btnNames" onAction="#chooseFile" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: silver; -fx-border-radius: 10; -fx-border-color: silver; -fx-background-radius: 10;" text="Choose names" textAlignment="CENTER" textFill="#b25252" HBox.hgrow="ALWAYS">
+                        <Button fx:id="btnNames" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#chooseFile" style="-fx-background-color: silver; -fx-border-radius: 10; -fx-border-color: silver; -fx-background-radius: 10;" text="Choose names" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="Noto Mono" size="14.0" />
                            </font>
@@ -62,7 +61,7 @@
                         <Insets bottom="20.0" top="50.0" />
                      </opaqueInsets>
                      <children>
-                        <Button onAction="#generateMenus" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="90.0" prefWidth="199.0" style="-fx-border-color: silver; -fx-border-radius: 30; -fx-background-color: silver; -fx-background-radius: 30;" text="Generate menus" textAlignment="CENTER" textFill="#b25252" HBox.hgrow="ALWAYS">
+                        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#generateMenus" prefHeight="90.0" prefWidth="199.0" style="-fx-border-color: silver; -fx-border-radius: 30; -fx-background-color: silver; -fx-background-radius: 30;" text="Generate menus" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="Noto Mono" size="14.0" />
                            </font>
@@ -80,9 +79,51 @@
          </content>
     </Tab>
     <Tab text="Printing">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
+         <content>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="listFilesPrintView" prefHeight="209.0" prefWidth="496.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ListView>
+                  <VBox alignment="CENTER" prefHeight="219.0" prefWidth="217.0">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <children>
+                        <Button fx:id="addFilesPrint" mnemonicParsing="false" onAction="#addFilesToPrint" prefHeight="55.0" prefWidth="155.0" style="-fx-border-color: silver; -fx-border-radius: 30; -fx-background-color: silver; -fx-background-radius: 30;" text="Add files">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin></Button>
+                        <Button fx:id="removeList" mnemonicParsing="false" onAction="#removeFromList" prefHeight="55.0" prefWidth="155.0" style="-fx-border-color: silver; -fx-border-radius: 30; -fx-background-color: silver; -fx-background-radius: 30;" text="Remove">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="97.0" prefWidth="153.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#generatePrintFile" prefHeight="55.0" prefWidth="155.0" style="-fx-border-color: silver; -fx-border-radius: 30; -fx-background-color: silver; -fx-background-radius: 30;" text="Generate">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+            </HBox>
+         </content>
     </Tab>
   </tabs>
 </TabPane>
