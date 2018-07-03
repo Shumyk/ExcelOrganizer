@@ -2,9 +2,18 @@ package shumyk.excel.formula;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.ComparisonOperator;
+import org.apache.poi.ss.usermodel.ConditionalFormattingRule;
+import org.apache.poi.ss.usermodel.FontFormatting;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.PatternFormatting;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.SheetConditionalFormatting;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFConditionalFormattingRule;
+import org.apache.poi.xssf.usermodel.XSSFSheetConditionalFormatting;
 
 public class ExcelFormula {
 	private Workbook workbook;
@@ -14,6 +23,8 @@ public class ExcelFormula {
 	}
 	
 	public Workbook createMenuWithPriceCalculating() {
+
+		
 		CellStyle sheetStyle = workbook.createCellStyle();
 		int indexOfPrice = getNumOfCell(workbook.getSheetAt(0).getRow(0), "Ціна");
 		int  indexOfCalculatedSum;
@@ -22,6 +33,7 @@ public class ExcelFormula {
 		} else {
 			indexOfCalculatedSum = indexOfPrice + 3;
 		}
+		int indexOfAmount = indexOfCalculatedSum - 1;
 		
 		
 		Sheet sheet = workbook.getSheetAt(0);
@@ -72,6 +84,21 @@ public class ExcelFormula {
 		cellSumFormula.setCellStyle(sheetStyle);
 		
 		
+		SheetConditionalFormatting formatting = workbook.getSheetAt(0).getSheetConditionalFormatting();
+		ConditionalFormattingRule rule = formatting.createConditionalFormattingRule("AND(ISNUMBER($"
+				.concat(mapToAlphabetic(indexOfAmount))
+				.concat("1),$")
+				.concat(mapToAlphabetic(indexOfAmount))
+				.concat("1>0)"));
+		PatternFormatting pattern = rule.createPatternFormatting();
+		pattern.setFillBackgroundColor(IndexedColors.LIGHT_YELLOW.index);
+		CellRangeAddress[] dataRange = {CellRangeAddress.valueOf(mapToAlphabetic(0)
+				.concat(String.valueOf(1))
+				.concat(":")
+				.concat(mapToAlphabetic(indexOfCalculatedSum))
+				.concat(String.valueOf(lastRowNum)) )};
+		formatting.addConditionalFormatting(dataRange, rule);
+		
 		return workbook;
 	}
 	
@@ -104,14 +131,14 @@ public class ExcelFormula {
 	}
 	
 	private boolean isNumeric(Cell cell) {
-		if(0 == cell.getCellType()) {
+		if(null != cell && 0 == cell.getCellType()) {
 			return true;
 		} else { 
 			return false;
 		}
 	}
 	private boolean isString(Cell cell) {
-		if(1 == cell.getCellType())
+		if(null != cell && 1 == cell.getCellType())
 			return true;
 		else
 			return false;
