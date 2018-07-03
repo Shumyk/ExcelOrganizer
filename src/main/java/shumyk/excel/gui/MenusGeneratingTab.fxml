@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox  xmlns:fx="http://javafx.com/fxml/1" prefWidth="600.0">
+   <children>
+      <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="1343.0" spacing="50.0" VBox.vgrow="ALWAYS">
+         <opaqueInsets>
+            <Insets bottom="20.0" top="20.0" />
+         </opaqueInsets>
+         <children>
+            <Button fx:id="btnMenu" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#chooseFile" prefWidth="121.0" style="-fx-background-color: silver; -fx-border-color: silver; -fx-border-radius: 10; -fx-background-radius: 10;" text="Choose menu" textAlignment="CENTER">
+               <font>
+                  <Font name="Noto Mono" size="14.0" />
+               </font>
+            </Button>
+            <TextField fx:id="menuUrl" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="400.0" promptText="choose menu..." text="choose menu...">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="20.0" prefHeight="30.0" prefWidth="1343.0" spacing="50.0" VBox.vgrow="ALWAYS">
+         <opaqueInsets>
+            <Insets bottom="20.0" top="20.0" />
+         </opaqueInsets>
+         <children>
+            <Button fx:id="btnNames" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#chooseFile" style="-fx-background-color: silver; -fx-border-radius: 10; -fx-border-color: silver; -fx-background-radius: 10;" text="Choose names" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Noto Mono" size="14.0" />
+               </font>
+            </Button>
+            <TextField fx:id="namesUrl" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="400.0" promptText="choose names..." text="choose names...">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="20.0" prefHeight="111.0" prefWidth="588.0" spacing="250.0">
+         <opaqueInsets>
+            <Insets bottom="20.0" top="50.0" />
+         </opaqueInsets>
+         <children>
+            <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#generateMenus" prefHeight="90.0" prefWidth="199.0" style="-fx-border-color: silver; -fx-border-radius: 30; -fx-background-color: silver; -fx-background-radius: 30;" text="Generate menus" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Noto Mono" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" top="-5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
+
