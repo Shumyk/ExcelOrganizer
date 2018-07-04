@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="shumyk.excel.gui.tab.printing.PrintingTabController">
    <children>
       <ListView fx:id="listFilesPrintView" prefHeight="209.0" prefWidth="496.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
          <opaqueInsets>

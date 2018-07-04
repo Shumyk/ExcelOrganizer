@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane prefHeight="252.0" prefWidth="610.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shumyk.excel.gui.controller.ExcelOrganizerController">
+<TabPane prefHeight="252.0" prefWidth="610.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab closable="false" text="Menus generating">
-		<fx:include fx:id="menusGeneratingTab" source="MenusGeneratingTab.fxml" />
+		<fx:include source="tab/generating/MenusGeneratingTab.fxml" />
     </Tab>
     <Tab text="Printing">
-         <fx:include fx:id="printingTab" source="PrintingTab.fxml"  />
+         <fx:include source="tab/printing/PrintingTab.fxml"  />
     </Tab>
   </tabs>
 </TabPane>
