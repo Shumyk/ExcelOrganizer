@@ -36,7 +36,6 @@ public class ExcelFormulaUtils {
 		for (Object object : items) {
 			builder.append(object);
 		}
-		System.out.println(builder.toString());
 		return builder.toString();
 	}
 	
