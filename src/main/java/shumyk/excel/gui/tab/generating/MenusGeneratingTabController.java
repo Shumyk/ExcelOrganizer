@@ -17,6 +17,16 @@ public class MenusGeneratingTabController extends ExcelOrganizerController {
 	@FXML
 	private TextField namesUrl;
 	
+	// mock / delete later / was created for ease development
+	@FXML 
+	public void initialize() {
+		menuUrl.setText("D:\\workspaceOwn\\ExcelOrganizer\\04.06.xlsx");
+		menu = new File("D:\\\\workspaceOwn\\\\ExcelOrganizer\\\\04.06.xlsx");
+		
+		namesUrl.setText("D:\\workspaceOwn\\ExcelOrganizer\\names.xlsx");
+		names = new File("D:\\\\workspaceOwn\\\\ExcelOrganizer\\\\names.xlsx");
+	}
+	
 	
 	// --------------- controllers ------------------ //
 	
