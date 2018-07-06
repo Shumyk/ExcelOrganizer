@@ -9,6 +9,7 @@ import shumyk.excel.generating.GeneratingExcels;
 import shumyk.excel.gui.controller.ExcelOrganizerController;
 
 public class MenusGeneratingTabController extends ExcelOrganizerController {
+	/* Files where are hold selected by user menu and names files */
 	private File menu;
 	private File names;
 	
@@ -17,43 +18,40 @@ public class MenusGeneratingTabController extends ExcelOrganizerController {
 	@FXML
 	private TextField namesUrl;
 	
-	// mock / delete later / was created for ease development
-	@FXML 
-	public void initialize() {
-		menuUrl.setText("D:\\workspaceOwn\\ExcelOrganizer\\04.06.xlsx");
-		menu = new File("D:\\\\workspaceOwn\\\\ExcelOrganizer\\\\04.06.xlsx");
-		
-		namesUrl.setText("D:\\workspaceOwn\\ExcelOrganizer\\names.xlsx");
-		names = new File("D:\\\\workspaceOwn\\\\ExcelOrganizer\\\\names.xlsx");
-	}
-	
-	
 	// --------------- controllers ------------------ //
 	
-	@FXML
-	private void chooseMenuFile() {
+	/**
+	 * Handler for "Choose menu" button.
+	 * Opens file chooser and if user chose something sets variables.
+	 */
+	@FXML private void chooseMenuFile() {
 		fileChooser.setTitle("Choose menu file...");
 		menu = fileChooser.showOpenDialog(null);
-		
 		if (menu == null)
 			return;
-		
 		menuUrl.setText(menu.getName());
 	}
 	
-	@FXML
-	private void chooseNamesFile() {
+	/**
+	 * Handler for "Choose names" button.
+	 * Opens file chooser and if user chose something sets variables.
+	 */
+	@FXML private void chooseNamesFile() {
 		fileChooser.setTitle("Choose names file...");
 		names = fileChooser.showOpenDialog(null);
-		
 		if (names == null)
 			return;
-		
 		namesUrl.setText(names.getName());
 	}
 	
-	@FXML
-	private void generateMenus() throws InterruptedException {
+	/**
+	 * Handler for "Generate" button.
+	 * Creates menus for every person in names file with calculation columns.
+	 * 
+	 * Alerts errors if some file wasn't chosen.
+	 * Also, alerts error if creation of files was unsuccessful and shows issue description (usually wrong files were selected)
+	 */
+	@FXML private void generateMenus() {
 		if (menu == null) {
 			alert(AlertType.ERROR, "Choose menu file.", "You didn't choose menu file. \n Please choose it.");
 			return;
