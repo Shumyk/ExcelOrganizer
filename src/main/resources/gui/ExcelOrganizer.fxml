@@ -13,10 +13,10 @@
 <TabPane prefHeight="252.0" prefWidth="610.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab closable="false" text="Menus generating">
-		<fx:include source="tab/generating/MenusGeneratingTab.fxml" />
+		<fx:include source="tabs/generating/MenusGeneratingTab.fxml" />
     </Tab>
     <Tab text="Printing">
-         <fx:include source="tab/printing/PrintingTab.fxml"  />
+         <fx:include source="tabs/printing/PrintingTab.fxml"  />
     </Tab>
   </tabs>
 </TabPane>

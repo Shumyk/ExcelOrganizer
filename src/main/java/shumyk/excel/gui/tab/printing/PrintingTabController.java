@@ -94,11 +94,12 @@ public class PrintingTabController extends ExcelOrganizerController {
 		}
 
 		/* Writing to file our sheet */
-		FileOutputStream fos = new FileOutputStream(new File("weekOrdersSchedule.xlsx"));
+		String fileName = "Week Orders Total.xlsx";
+		FileOutputStream fos = new FileOutputStream(new File(fileName));
 		helper.schedule.write(fos);
 		fos.close();
 		
-		alert(AlertType.INFORMATION, "Schedule is created!", "Schedule for week is created. \nSearch it file in folder with name \"weekOrdersSchedule.xlsx\"");
+		alert(AlertType.INFORMATION, "Schedule is created!", "Schedule for week is created. \nSearch it file in folder with name ".concat(fileName));
 	}
 	
 }

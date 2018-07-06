@@ -1,8 +1,7 @@
 package shumyk.excel.gui.controller.helpers;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class WorkbookHelper {
 	/* main elements of result file */
-	private FileInputStream fis; 
+	private InputStream inputStream; 
 	public Workbook schedule;
 	public Sheet scheduleSheet;
 	public Row scheduleMainRow;
@@ -50,8 +49,8 @@ public class WorkbookHelper {
 	 * this method called every time we need to work with workbook.
 	 */
 	public void initWorkbook() throws IOException {
-		fis = new FileInputStream(new File("template.xlsx"));
-		schedule = new XSSFWorkbook(fis);
+		inputStream = getClass().getResourceAsStream("/template/Week Orders Total Template.xlsx");
+		schedule = new XSSFWorkbook(inputStream);
 		scheduleSheet = schedule.getSheet("Schedule");
 		scheduleMainRow = scheduleSheet.getRow(0);
 	}
