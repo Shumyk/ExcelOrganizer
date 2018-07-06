@@ -47,7 +47,6 @@ public class ExcelFormula {
 		// fills calculation part
 		fillCalculationPart(sheet);
 		
-		lastRowNum = sheet.getLastRowNum();
 		// creates summarize row of sheet
 		Row summarizeRow = sheet.createRow(lastRowNum);
 		fillSummarizeRow(summarizeRow);
@@ -79,6 +78,8 @@ public class ExcelFormula {
 				Cell cellSumm = row.createCell(indexOfCalculatedSum);
 				cellSumm.setCellValue("Сума");
 				cellSumm.setCellStyle(sheetStyle);
+				// this line sets the last row that was populated, cause Sheet.getLastRowNum() sometimes counts empty rows as valid
+				lastRowNum = row.getRowNum() + 1;
 				continue;
 			}
 			/* if price cell of row is numeric than it is order row and it adds formulas  */
@@ -86,6 +87,8 @@ public class ExcelFormula {
 				int rowIndex = row.getRowNum();
 				String formula = append(toCols(indexOfPrice), rowIndex + 1, "*", toCols(indexOfCalculatedSum - 1), rowIndex + 1);
 				row.createCell(indexOfCalculatedSum).setCellFormula(formula);
+				// this line sets the last row that was populated, cause Sheet.getLastRowNum() sometimes counts empty rows as valid
+				lastRowNum = row.getRowNum() + 1;
 			}
 		}
 	}
