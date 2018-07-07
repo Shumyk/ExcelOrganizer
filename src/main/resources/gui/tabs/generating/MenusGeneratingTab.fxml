@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefWidth="610.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shumyk.excel.gui.tab.generating.MenusGeneratingTabController">
+<VBox alignment="CENTER" prefWidth="610.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shumyk.excel.gui.tab.generating.MenusGeneratingTabController">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="1343.0" spacing="50.0" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" prefHeight="79.0" prefWidth="610.0" spacing="50.0" VBox.vgrow="ALWAYS">
          <opaqueInsets>
             <Insets bottom="20.0" top="20.0" />
          </opaqueInsets>
@@ -29,27 +29,7 @@
             <Insets top="10.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="20.0" prefHeight="30.0" prefWidth="1343.0" spacing="50.0" VBox.vgrow="ALWAYS">
-         <opaqueInsets>
-            <Insets bottom="20.0" top="20.0" />
-         </opaqueInsets>
-         <children>
-            <Button fx:id="btnNames" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#chooseNamesFile" style="-fx-background-color: silver; -fx-border-radius: 10; -fx-border-color: silver; -fx-background-radius: 10;" text="Choose names" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font name="Noto Mono" size="14.0" />
-               </font>
-            </Button>
-            <TextField fx:id="namesUrl" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="400.0" promptText="choose names..." text="choose names...">
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="20.0" prefHeight="111.0" prefWidth="588.0" spacing="250.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="20.0" prefHeight="116.0" prefWidth="610.0" spacing="250.0">
          <opaqueInsets>
             <Insets bottom="20.0" top="50.0" />
          </opaqueInsets>

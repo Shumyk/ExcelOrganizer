@@ -11,12 +11,9 @@ import shumyk.excel.gui.controller.ExcelOrganizerController;
 public class MenusGeneratingTabController extends ExcelOrganizerController {
 	/* Files where are hold selected by user menu and names files */
 	private File menu;
-	private File names;
 	
 	@FXML
 	private TextField menuUrl;
-	@FXML
-	private TextField namesUrl;
 	
 	// --------------- controllers ------------------ //
 	
@@ -33,18 +30,6 @@ public class MenusGeneratingTabController extends ExcelOrganizerController {
 	}
 	
 	/**
-	 * Handler for "Choose names" button.
-	 * Opens file chooser and if user chose something sets variables.
-	 */
-	@FXML private void chooseNamesFile() {
-		fileChooser.setTitle("Choose names file...");
-		names = fileChooser.showOpenDialog(null);
-		if (names == null)
-			return;
-		namesUrl.setText(names.getName());
-	}
-	
-	/**
 	 * Handler for "Generate" button.
 	 * Creates menus for every person in names file with calculation columns.
 	 * 
@@ -55,13 +40,10 @@ public class MenusGeneratingTabController extends ExcelOrganizerController {
 		if (menu == null) {
 			alert(AlertType.ERROR, "Choose menu file.", "You didn't choose menu file. \n Please choose it.");
 			return;
-		} else if (names == null) {
-			alert(AlertType.ERROR, "Choose name file.", "You didn't choose names file. \n Please choose it.");
-			return;
 		} 
 		
 		try {
-			GeneratingExcels.createMenusPerPerson(menu, names);
+			GeneratingExcels.createMenusPerPerson(menu);
 		} catch (Exception e) {
 			e.printStackTrace();
 			

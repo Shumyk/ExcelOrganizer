@@ -65,7 +65,8 @@ public class PrintingTabController extends ExcelOrganizerController {
 	 * 
 	 * @throws IOException
 	 */
-	@FXML private void generatePrintFile() throws IOException {
+	@FXML private void generatePrintFile() {
+		try {
 		/* Initialize workbook, sheet etc. every time to avoid POI bug */
 		helper.initWorkbook();
 		List<File> files = listFilesPrintView.getItems();
@@ -100,6 +101,10 @@ public class PrintingTabController extends ExcelOrganizerController {
 		fos.close();
 		
 		alert(AlertType.INFORMATION, "Schedule is created!", "Schedule for week is created. \nSearch it file in folder with name ".concat(fileName));
+		} catch (Exception e) {
+			alert(AlertType.ERROR, "Error occured :(", "Something went wrong. \nProbably there somewhere problem in your xlsx files.", e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 }

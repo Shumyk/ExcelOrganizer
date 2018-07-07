@@ -16,6 +16,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import shumyk.excel.gui.MainGUI;
 import shumyk.excel.gui.controller.ExcelOrganizerController;
 
 public class SettingsTabController extends ExcelOrganizerController {
@@ -23,8 +24,7 @@ public class SettingsTabController extends ExcelOrganizerController {
 	/**
 	 * Path to the names file.
 	 */
-	private String namesResourceLocation = "/names/names.txt";
-	private String namesLoc = getClass().getResource(namesResourceLocation).getPath();
+	private String namesLoc = getClass().getResource(MainGUI.NAMES_FILE).getPath();
 	
 	@FXML
 	private ListView<String> customersNames;
@@ -105,7 +105,7 @@ public class SettingsTabController extends ExcelOrganizerController {
 	 * Updates ListView with the current names file.
 	 */
 	private void updateCustomersNames() {
-		Scanner scanner = new Scanner(getClass().getResourceAsStream(namesResourceLocation));
+		Scanner scanner = new Scanner(getClass().getResourceAsStream(MainGUI.NAMES_FILE));
 		customersNames.getItems().clear();
 		while (scanner.hasNext())
 			customersNames.getItems().add(scanner.nextLine());

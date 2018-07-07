@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -14,6 +15,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import shumyk.excel.formula.ExcelFormula;
+import shumyk.excel.gui.MainGUI;
 
 public class GeneratingExcels {
 	
@@ -23,23 +25,26 @@ public class GeneratingExcels {
 	 * @param names of people for whom created separate menu
 	 * @throws IOException
 	 */
-	public static void createMenusPerPerson(File menu, File names) throws IOException {
+	public static void createMenusPerPerson(File menu) throws IOException {
 		/* Creating of names sheet */
-		FileInputStream fis = new FileInputStream(names);
-		Sheet sheet = new XSSFWorkbook(fis).getSheetAt(0);
+		
+		Scanner scanner = new Scanner(GeneratingExcels.class.getResourceAsStream(MainGUI.NAMES_FILE));
+		
+//		FileInputStream fis = new FileInputStream(names);
+//		Sheet sheet = new XSSFWorkbook(fis).getSheetAt(0);
 		
 		/* Creating of folder where all menus gonna be hold */
 		String pathDir = "menu per person/";
 		new File(pathDir).mkdir();
 		
 		/* Loops over every row in names sheet and creates for this person separate menu */
-		for (Row row : sheet) {
+		while (scanner.hasNext()) {
 			ExcelFormula excelFormula = new ExcelFormula(new XSSFWorkbook(new FileInputStream(menu)));
 			// retrieving workbook with formulas and formating
 			Workbook menuResult = excelFormula.createMenuWithPriceCalculating();
 			
 			String menuFileName = menu.getName();
-			String nameOfPerson = row.getCell(0).getStringCellValue();
+			String nameOfPerson = scanner.nextLine();
 			Cell cell = menuResult.getSheetAt(0).getRow(0).getCell(0);
 			// sets comment with name of person to initial cell (needed in further operations)
 			setCellComment(cell, nameOfPerson);
@@ -50,6 +55,7 @@ public class GeneratingExcels {
 			menuResult.write(fos);
 			fos.close();
 		}
+		scanner.close();
 	}
 	
 
