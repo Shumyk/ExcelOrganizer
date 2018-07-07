@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainGUI extends Application {
+	public static final String NAMES_FILE = "/names/names.txt";
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
