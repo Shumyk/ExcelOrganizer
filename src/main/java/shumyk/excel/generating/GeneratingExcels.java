@@ -13,10 +13,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import shumyk.excel.formula.ExcelFormula;
-import shumyk.excel.gui.MainGUI;
 import shumyk.excel.gui.controller.ExcelOrganizerController;
 
 public class GeneratingExcels {
+	public static final String MENUS_DIR = "menu per person/";
 	
 	/**
 	 * Creates separate menu for every person with calculation and formating possibilities.
@@ -30,8 +30,7 @@ public class GeneratingExcels {
 		Scanner scanner = new Scanner(GeneratingExcels.class.getResourceAsStream(ExcelOrganizerController.NAMES_FILE));
 		
 		/* Creating of folder where all menus gonna be hold */
-		String pathDir = "menu per person/";
-		new File(pathDir).mkdir();
+		new File(MENUS_DIR).mkdir();
 		
 		/* Loops over every row in names sheet and creates for this person separate menu */
 		while (scanner.hasNext()) {
@@ -45,7 +44,7 @@ public class GeneratingExcels {
 			// sets comment with name of person to initial cell (needed in further operations)
 			setCellComment(cell, nameOfPerson);
 			// creating name of file with person's name
-			String pathNewExcel = append(pathDir, menuFileName.substring(0, menuFileName.indexOf(".xlsx")), " ", nameOfPerson, ".xlsx");
+			String pathNewExcel = append(MENUS_DIR, menuFileName.substring(0, menuFileName.indexOf(".xlsx")), " ", nameOfPerson, ".xlsx");
 			// writing excel file
 			FileOutputStream fos = new FileOutputStream(new File(pathNewExcel));
 			menuResult.write(fos);

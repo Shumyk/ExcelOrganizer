@@ -1,5 +1,6 @@
 package shumyk.excel.gui.tab.generating;
 
+import java.awt.Desktop;
 import java.io.File;
 
 import javafx.fxml.FXML;
@@ -44,6 +45,7 @@ public class MenusGeneratingTabController extends ExcelOrganizerController {
 		
 		try {
 			GeneratingExcels.createMenusPerPerson(menu);
+			Desktop.getDesktop().open(new File(GeneratingExcels.MENUS_DIR));
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -54,6 +56,5 @@ public class MenusGeneratingTabController extends ExcelOrganizerController {
 					true, 200.0, 100.0);
 			return;
 		}
-		alert(AlertType.INFORMATION, "Files are created :D", "Menus for every person are created. Check them out in  folder.");
 	}
 }

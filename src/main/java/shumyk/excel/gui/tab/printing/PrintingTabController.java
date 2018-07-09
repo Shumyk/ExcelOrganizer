@@ -1,5 +1,6 @@
 package shumyk.excel.gui.tab.printing;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import shumyk.excel.generating.GeneratingExcels;
 import shumyk.excel.gui.controller.ExcelOrganizerController;
 import shumyk.excel.gui.controller.helpers.WorkbookHelper;
 
@@ -31,7 +33,10 @@ public class PrintingTabController extends ExcelOrganizerController {
 	 */
 	public void initialize() {
 		listFilesPrintView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
+		populateListView();
 	}
+	
 
 	// --------------- controllers ------------------ //
 
@@ -100,11 +105,23 @@ public class PrintingTabController extends ExcelOrganizerController {
 		helper.schedule.write(fos);
 		fos.close();
 		
-		alert(AlertType.INFORMATION, "Schedule is created!", "Schedule for week is created. \nSearch it file in folder with name ".concat(fileName));
+		Desktop.getDesktop().open(new File(fileName));
 		} catch (Exception e) {
 			alert(AlertType.ERROR, "Error occured :(", "Something went wrong. \nProbably there somewhere problem in your xlsx files.", e.getMessage());
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Adds all items from generated folder where all menus per person is collected.
+	 */
+	private void populateListView() {
+		File menuDir = new File(GeneratingExcels.MENUS_DIR);
+		if (!menuDir.isDirectory())
+			return;
+		
+		for (final File file : menuDir.listFiles()) {
+			listFilesPrintView.getItems().add(file);			
+		}
+	}
 }
