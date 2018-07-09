@@ -9,13 +9,12 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import shumyk.excel.formula.ExcelFormula;
 import shumyk.excel.gui.MainGUI;
+import shumyk.excel.gui.controller.ExcelOrganizerController;
 
 public class GeneratingExcels {
 	
@@ -28,10 +27,7 @@ public class GeneratingExcels {
 	public static void createMenusPerPerson(File menu) throws IOException {
 		/* Creating of names sheet */
 		
-		Scanner scanner = new Scanner(GeneratingExcels.class.getResourceAsStream(MainGUI.NAMES_FILE));
-		
-//		FileInputStream fis = new FileInputStream(names);
-//		Sheet sheet = new XSSFWorkbook(fis).getSheetAt(0);
+		Scanner scanner = new Scanner(GeneratingExcels.class.getResourceAsStream(ExcelOrganizerController.NAMES_FILE));
 		
 		/* Creating of folder where all menus gonna be hold */
 		String pathDir = "menu per person/";

@@ -49,7 +49,7 @@ public class WorkbookHelper {
 	 * this method called every time we need to work with workbook.
 	 */
 	public void initWorkbook() throws IOException {
-		inputStream = getClass().getResourceAsStream("/template/Week Orders Total Template.xlsx");
+		inputStream = getClass().getResourceAsStream("/template/WeekOrdersTotalTemplate.xlsx");
 		schedule = new XSSFWorkbook(inputStream);
 		scheduleSheet = schedule.getSheet("Schedule");
 		scheduleMainRow = scheduleSheet.getRow(0);
