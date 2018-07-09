@@ -1,11 +1,14 @@
 package shumyk.excel.gui.tab.settings;
 
+import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Scanner;
@@ -75,6 +78,11 @@ public class SettingsTabController extends ExcelOrganizerController {
 		});
 		
 		updateCustomersNames();
+	}
+	
+	@FXML private void changeTemplate() throws IOException {
+		URL template = new URL(getClass().getResource("/template/Week Orders Total Template.xlsx").getPath());
+		Desktop.getDesktop().open(new File(template.getPath()));
 	}
 	
 	/**

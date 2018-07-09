@@ -19,14 +19,14 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <ListView fx:id="customersNames" prefHeight="212.0" prefWidth="288.0" style="-fx-background-radius: 20; -fx-background-radius: 20;" onKeyPressed="#removeSelectedNamesByKeyPressed" />
+            <ListView fx:id="customersNames" onKeyPressed="#removeSelectedNamesByKeyPressed" prefHeight="212.0" prefWidth="288.0" style="-fx-background-radius: 20; -fx-background-radius: 20;" />
          </children>
       </VBox>
       <VBox maxHeight="1.7976931348623157E308" prefHeight="222.0" prefWidth="255.0">
          <children>
             <HBox alignment="TOP_RIGHT" prefHeight="140.0" prefWidth="251.0" spacing="2.0">
                <children>
-                  <TextField fx:id="textField" alignment="CENTER" prefHeight="30.0" prefWidth="183.0" onKeyPressed="#addCustomerNameByKeyPressed" promptText="enter new customer" style="-fx-background-radius: 10;" />
+                  <TextField fx:id="textField" alignment="CENTER" onKeyPressed="#addCustomerNameByKeyPressed" prefHeight="30.0" prefWidth="183.0" promptText="enter new customer" style="-fx-background-radius: 10;" />
                   <VBox alignment="TOP_RIGHT" prefHeight="111.0" prefWidth="112.0" spacing="10.0">
                      <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addCustomerName" prefHeight="30.0" prefWidth="75.0" style="-fx-background-radius: 20; -fx-background-color: silver;" text="Add" textAlignment="CENTER" />
@@ -43,7 +43,7 @@
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: silver; -fx-background-radius: 20;" text="Change template" textAlignment="CENTER" visible="false">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: silver; -fx-background-radius: 20;" onAction="#changeTemplate" text="Change template" textAlignment="CENTER">
                      <effect>
                         <Blend />
                      </effect>
