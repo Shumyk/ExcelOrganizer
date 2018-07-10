@@ -14,10 +14,10 @@ public class ExcelOrganizerController {
 	protected FileChooser fileChooser = new FileChooser();
 	protected FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Only xlsx files", "*.xlsx");
 
-	public static final String NAMES_FILE = "/names/names.txt";
-	public static final String NAMES_TEMP_FILE = "/names/temp.txt";
-	public static final String TEMPLATE_FILE = "/template/WeekOrdersTotalTemplate.xlsx";
-
+	public static final String NAMES_RES = "resources/names.txt";
+	public static final String NAMES_TMP_RES = "resources/temp.txt";
+	public static final String TEMPLATE_RES = "resources/template.xlsx";
+	
 	public ExcelOrganizerController() {
 		fileChooser.getExtensionFilters().add(extFilter);
 	}

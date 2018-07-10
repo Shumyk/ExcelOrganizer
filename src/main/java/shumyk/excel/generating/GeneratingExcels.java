@@ -27,7 +27,7 @@ public class GeneratingExcels {
 	public static void createMenusPerPerson(File menu) throws IOException {
 		/* Creating of names sheet */
 		
-		Scanner scanner = new Scanner(GeneratingExcels.class.getResourceAsStream(ExcelOrganizerController.NAMES_FILE));
+		Scanner scanner = new Scanner(new File(ExcelOrganizerController.NAMES_RES));
 		
 		/* Creating of folder where all menus gonna be hold */
 		new File(MENUS_DIR).mkdir();

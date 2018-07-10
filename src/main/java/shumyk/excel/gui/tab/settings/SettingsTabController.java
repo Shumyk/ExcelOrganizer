@@ -4,9 +4,11 @@ import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -26,8 +28,8 @@ public class SettingsTabController extends ExcelOrganizerController {
 	/**
 	 * Path to the names file.
 	 */
-	private String namesLoc = getClass().getResource(NAMES_FILE).getPath();
-	private String namesTempLoc = getClass().getResource(NAMES_TEMP_FILE).getPath();
+	private File namesFile = new File(NAMES_RES);
+	private File namesTmpFile = new File(NAMES_TMP_RES);
 	
 	@FXML
 	private ListView<String> customersNames;
@@ -35,7 +37,7 @@ public class SettingsTabController extends ExcelOrganizerController {
 	private TextField textField;
 	
 	
-	public void initialize() {
+	public void initialize() throws FileNotFoundException {
 		customersNames.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		updateCustomersNames();
 	}
@@ -54,7 +56,7 @@ public class SettingsTabController extends ExcelOrganizerController {
 		if (null == customerName || customerName.equals(""))
 			return;
 		
-		printWriter = new PrintWriter(new BufferedWriter(new FileWriter(namesLoc, true)));
+		printWriter = new PrintWriter(new BufferedWriter(new FileWriter(namesFile, true)));
 		printWriter.println(customerName);
 		printWriter.close();
 		
@@ -79,8 +81,8 @@ public class SettingsTabController extends ExcelOrganizerController {
 	 * @throws IOException
 	 */
 	@FXML private void changeTemplate() throws IOException {
-		URL template = getClass().getResource(TEMPLATE_FILE);
-		Desktop.getDesktop().open(new File(template.getPath()));
+		File file = new File(TEMPLATE_RES);
+		Desktop.getDesktop().open(file);
 	}
 	
 	/**
@@ -109,10 +111,10 @@ public class SettingsTabController extends ExcelOrganizerController {
 	
 	/**
 	 * Updates ListView with the current names file.
+	 * @throws FileNotFoundException 
 	 */
-	private void updateCustomersNames() {
-		InputStream input = getClass().getResourceAsStream(NAMES_FILE);
-		Scanner scanner = new Scanner(input);
+	private void updateCustomersNames() throws FileNotFoundException {
+		Scanner scanner = new Scanner(new File(NAMES_RES));
 		customersNames.getItems().clear();
 		while (scanner.hasNext())
 			customersNames.getItems().add(scanner.nextLine());
@@ -127,13 +129,10 @@ public class SettingsTabController extends ExcelOrganizerController {
 	 */
 	void removeLine(String lineRemove) {
 		try {
-		File names = new File(namesLoc);
-		File temp = new File(namesTempLoc);
-		
-		printWriter = new PrintWriter(new FileWriter(temp));
+		printWriter = new PrintWriter(new FileWriter(namesTmpFile));
 		printWriter.print("");
 		
-		Scanner sc = new Scanner(names);
+		Scanner sc = new Scanner(namesFile);
 		while (sc.hasNext()) {
 			String line = sc.nextLine();
 			if (!line.equals(lineRemove))
@@ -143,9 +142,9 @@ public class SettingsTabController extends ExcelOrganizerController {
 		printWriter.close();
 		sc.close();
 		
-		PrintWriter toNames = new PrintWriter(new FileWriter(names));
+		PrintWriter toNames = new PrintWriter(new FileWriter(namesFile));
 		toNames.print("");
-		sc = new Scanner(getClass().getResourceAsStream(NAMES_TEMP_FILE));
+		sc = new Scanner(namesTmpFile);
 		while (sc.hasNext())
 			toNames.println(sc.nextLine());
 		
