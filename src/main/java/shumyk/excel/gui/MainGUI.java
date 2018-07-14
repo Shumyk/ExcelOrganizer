@@ -15,9 +15,12 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainGUI extends Application {
-	public static final String NAMES_FILE = "/names/names.txt";
-	public static final String NAMES_TEMP_FILE = "/names/temp.txt";
-	public static final String TEMPLATE_FILE = "/template/WeekOrdersTotalTemplate.xlsx";
+	// files in jar's resources folders, only used to be initialize once
+	private static final String NAMES_FILE = "/names/names.txt";
+	private static final String NAMES_TEMP_FILE = "/names/temp.txt";
+	private static final String TEMPLATE_FILE = "/template/WeekOrdersTotalTemplate.xlsx";
+	// folder with external resources, which are used during runtime
+	private final String FOLDER_RES = "resources";
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -36,8 +39,13 @@ public class MainGUI extends Application {
 		launch(args);
 	}
 	
+	/**
+	 * Creates folder "resources" if it doesn't exist yet.
+	 * In that folder creates files needed for further correct work of program.
+	 * @throws IOException
+	 */
 	private void initResources() throws IOException {
-		File dirResources = new File("resources");
+		File dirResources = new File(FOLDER_RES);
 		if (dirResources.exists())
 			return;
 		dirResources.mkdir();
@@ -48,9 +56,15 @@ public class MainGUI extends Application {
 		
 	}
 	
+	/**
+	 * Takes file from specified location and writes to resources folder with specified name.
+	 * @param location where to take file
+	 * @param output name of output file in resources folder
+	 * @throws IOException
+	 */
 	private void writeFile(String location, String output) throws IOException {
 			InputStream input = getClass().getResourceAsStream(location);
-			File file = new File("resources/" + output);
+			File file = new File(FOLDER_RES.concat("/").concat(output));
 			OutputStream out = new FileOutputStream(file);
 			int read;
 			byte[] bytes = new byte[1024];

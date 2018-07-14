@@ -4,14 +4,10 @@ import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
 
@@ -128,28 +124,36 @@ public class SettingsTabController extends ExcelOrganizerController {
 	 * @throws IOException
 	 */
 	void removeLine(String lineRemove) {
+			scanFromTo(namesFile, namesTmpFile, true, lineRemove);
+			scanFromTo(namesTmpFile, namesFile, false, lineRemove);
+	}
+	
+	/**
+	 * Scans content from first file to second.
+	 * If third argument is true, then method scans to temporary file and it should filter lines
+	 * and do not scan line what equals lineRemove.
+	 * @param from file
+	 * @param to file
+	 * @param toTemp does it scans to temporary file?
+	 * @param lineRemove if yes, then this line should be skipped.
+	 */
+	private void scanFromTo(File from, File to, boolean toTemp, String lineRemove) {
 		try {
-		printWriter = new PrintWriter(new FileWriter(namesTmpFile));
+		printWriter = new PrintWriter(new FileWriter(to));
 		printWriter.print("");
 		
-		Scanner sc = new Scanner(namesFile);
+		Scanner sc = new Scanner(from);
 		while (sc.hasNext()) {
 			String line = sc.nextLine();
-			if (!line.equals(lineRemove))
+			if (toTemp) {
+				if (!line.equals(lineRemove))	printWriter.println(line);
+			}
+			else
 				printWriter.println(line);
 		}
+		
 		printWriter.flush();
 		printWriter.close();
-		sc.close();
-		
-		PrintWriter toNames = new PrintWriter(new FileWriter(namesFile));
-		toNames.print("");
-		sc = new Scanner(namesTmpFile);
-		while (sc.hasNext())
-			toNames.println(sc.nextLine());
-		
-		toNames.flush();
-		toNames.close();
 		sc.close();
 		} catch (IOException e) {
 			e.printStackTrace();

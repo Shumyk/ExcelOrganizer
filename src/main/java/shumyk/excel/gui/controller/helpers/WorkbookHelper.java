@@ -1,5 +1,7 @@
 package shumyk.excel.gui.controller.helpers;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -13,6 +15,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import shumyk.excel.gui.controller.ExcelOrganizerController;
 
 public class WorkbookHelper {
 	/* main elements of result file */
@@ -49,7 +53,7 @@ public class WorkbookHelper {
 	 * this method called every time we need to work with workbook.
 	 */
 	public void initWorkbook() throws IOException {
-		inputStream = getClass().getResourceAsStream("/template/WeekOrdersTotalTemplate.xlsx");
+		inputStream = new FileInputStream(new File(ExcelOrganizerController.TEMPLATE_RES));
 		schedule = new XSSFWorkbook(inputStream);
 		scheduleSheet = schedule.getSheet("Schedule");
 		scheduleMainRow = scheduleSheet.getRow(0);

@@ -111,7 +111,7 @@ public class ExcelFormula {
 	}
 	
 	/**
-	 * 
+	 * Adds formatting. When some number is put into amount column all column should be highlighted.
 	 * @param formatting
 	 */
 	private void createSheetHighlightingFormating(SheetConditionalFormatting formatting) {
